@@ -3,8 +3,6 @@ import { Context as AuthContext } from "./src/context/authContext";
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, Text, View } from 'react-native';
-
 
 import CreateAccountScreen from './src/screens/CreateAccountScreen';
 import CreateReportScreen from './src/screens/CreateReportScreen';
@@ -72,7 +70,6 @@ export const MainNavigator = () => {
 
 export default function Routes() {
     const { state } = useContext(AuthContext);
-    console.log(state);
     return (
         <>
             { state.token ? <MainNavigator/> : <AuthNavigator/> }
