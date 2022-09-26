@@ -1,21 +1,26 @@
 import { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Input, Text, Button } from '@rneui/base';
+import Spacer from '../components/Spacer';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     return (
         <View styles={styles.container}>
-            <Text h3>Log In</Text>
-            <TextInput 
+            <Spacer>
+                <Text h3>Log In</Text>
+            </Spacer>
+            <Input 
                 label="Email"
                 value={email}
                 onChangeText={setEmail}
                 autoCapitalize="none"
                 autoCorrect={false}
             />
-            <TextInput
+            <Spacer/>
+            <Input
                 secureTextEntry
                 label="Password"
                 value={password}
@@ -23,8 +28,10 @@ const LoginScreen = () => {
                 autoCapitalize="none"
                 autoCorrect={false} 
             />
-            <Button title="Log In"/>
-            <TouchableOpacity>
+            <Spacer>
+                <Button title="Log In" onPress={() => navigation.navigate('ExploreNavigator')}/>
+            </Spacer>
+            <TouchableOpacity onPress={() => navigation.navigate('CreateAccount')}>
                 <Text>Don't have an account? Create an account instead.</Text>
             </TouchableOpacity>
         </View>
