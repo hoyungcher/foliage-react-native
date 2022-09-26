@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Input, Text, Button } from '@rneui/base';
 import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/authContext';
@@ -12,7 +13,7 @@ const CreateAccountScreen = ({ navigation }) => {
     console.log(state);
 
     return (
-        <View styles={styles.container}>
+        <SafeAreaView styles={styles.container}>
             <Spacer>
                 <Text h3>Create Account</Text>
             </Spacer>
@@ -39,7 +40,7 @@ const CreateAccountScreen = ({ navigation }) => {
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                 <Text>Already have an account? Log in instead.</Text>
             </TouchableOpacity>
-        </View>
+        </SafeAreaView>
     )
 }
 

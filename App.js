@@ -1,4 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useContext } from 'react';
 
 import Routes from './Routes';
@@ -8,7 +9,9 @@ export default function App() {
   return (
     <AuthProvider>
       <NavigationContainer>
-        <Routes/>
+        <SafeAreaProvider>
+          <Routes/>
+        </SafeAreaProvider>
       </NavigationContainer>
     </AuthProvider>
   );

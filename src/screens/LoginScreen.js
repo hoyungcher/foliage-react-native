@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Input, Text, Button } from '@rneui/base';
 import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/authContext';
@@ -10,7 +11,7 @@ const LoginScreen = ({ navigation }) => {
     const [password, setPassword] = useState('');
 
     return (
-        <View styles={styles.container}>
+        <SafeAreaView styles={styles.container}>
             <Spacer>
                 <Text h3>Log In</Text>
             </Spacer>
@@ -37,7 +38,7 @@ const LoginScreen = ({ navigation }) => {
             <TouchableOpacity onPress={() => navigation.navigate('CreateAccount')}>
                 <Text>Don't have an account? Create an account instead.</Text>
             </TouchableOpacity>
-        </View>
+        </SafeAreaView>
     )
 }
 

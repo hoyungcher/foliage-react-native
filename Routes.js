@@ -26,7 +26,7 @@ const BottomTabNavigator = createBottomTabNavigator();
 // Unauthenticated routes -- Limited Explore Screen to be added
 export const AuthNavigator = () => {
   return (
-    <AuthStackNavigator.Navigator>
+    <AuthStackNavigator.Navigator screenOptions={{ headerShown: false }}>
       <AuthStackNavigator.Screen name="Login" component={LoginScreen}></AuthStackNavigator.Screen>
       <AuthStackNavigator.Screen name="CreateAccount" component={CreateAccountScreen}></AuthStackNavigator.Screen>
     </AuthStackNavigator.Navigator>
@@ -35,7 +35,7 @@ export const AuthNavigator = () => {
 
 export const ExploreNavigator = () => {
   return (
-    <ExploreStackNavigator.Navigator>
+    <ExploreStackNavigator.Navigator screenOptions={{ headerShown: false }}>
       <ExploreStackNavigator.Screen name="Explore" component={ExploreScreen}></ExploreStackNavigator.Screen>
       <ExploreStackNavigator.Screen name="Locations" component={LocationsScreen}></ExploreStackNavigator.Screen>
       <ExploreStackNavigator.Screen name="Phenomena" component={PhenomenaScreen}></ExploreStackNavigator.Screen>
@@ -48,7 +48,7 @@ export const ExploreNavigator = () => {
 
 export const ProfileNavigator = () => {
   return (
-    <ProfileStackNavigator.Navigator>
+    <ProfileStackNavigator.Navigator screenOptions={{ headerShown: false }}>
       <ProfileStackNavigator.Screen name="Profile" component={ProfileScreen}></ProfileStackNavigator.Screen>
       <ProfileStackNavigator.Screen name="My Reports" component={ReportsScreen}></ProfileStackNavigator.Screen>
     </ProfileStackNavigator.Navigator>
@@ -59,7 +59,7 @@ export const ProfileNavigator = () => {
 // Authenticated Routes
 export const MainNavigator = () => {
   return (
-    <BottomTabNavigator.Navigator>
+    <BottomTabNavigator.Navigator screenOptions={{ headerShown: false }}>
       <BottomTabNavigator.Screen name="ExploreNavigator" component={ExploreNavigator}></BottomTabNavigator.Screen>
       <BottomTabNavigator.Screen name="Saved" component={SavedScreen}></BottomTabNavigator.Screen>
       <BottomTabNavigator.Screen name="CreateReport" component={CreateReportScreen}></BottomTabNavigator.Screen>

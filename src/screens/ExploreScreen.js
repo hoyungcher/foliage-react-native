@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import SearchBar from '../components/SearchBar';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const ExploreScreen = () => {
     return (
-        <View>
-            <SearchBar/>
+        <SafeAreaView>
             <Text>Explore Screen</Text>
-        </View>
+        </SafeAreaView>
     )
 }
 
