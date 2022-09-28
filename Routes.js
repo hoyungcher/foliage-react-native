@@ -17,6 +17,7 @@ import FavouritesScreen from "./src/screens/FavouritesScreen";
 import ExploreScreen from "./src/screens/ExploreScreen";
 import ReportScreen from "./src/screens/ReportScreen";
 import ReportsScreen from "./src/screens/ReportsScreen";
+import WelcomeScreen from "./src/screens/WelcomeScreen";
 
 const AuthStackNavigator = createStackNavigator();
 const ExploreStackNavigator = createStackNavigator();
@@ -27,6 +28,10 @@ const BottomTabNavigator = createBottomTabNavigator();
 export const AuthNavigator = () => {
   return (
     <AuthStackNavigator.Navigator screenOptions={{ headerShown: false }}>
+		<AuthStackNavigator.Screen 
+			name="Welcome" 
+			component={WelcomeScreen} 
+		/>
       	<AuthStackNavigator.Screen 
 			name="Login" 
 			component={LoginScreen} 

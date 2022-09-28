@@ -7,7 +7,6 @@ const LocationsScreen = () => {
         <View styles={styles.container}>
             <SearchBar/>
             <Text>LocationsScreen</Text>
-
         </View>
     )
 }
