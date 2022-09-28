@@ -3,16 +3,19 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useContext } from 'react';
 
 import Routes from './Routes';
-import { Provider as AuthProvider, Context as AuthContext } from './src/context/authContext';
+import { Provider as AuthProvider } from './src/context/authContext';
+import { Provider as LocationProvider } from './src/context/locationContext';
 
 export default function App() {
   return (
-    <AuthProvider>
-      <NavigationContainer>
-        <SafeAreaProvider>
-          <Routes/>
-        </SafeAreaProvider>
-      </NavigationContainer>
-    </AuthProvider>
+    <LocationProvider>
+		<AuthProvider>
+			<NavigationContainer>
+			<SafeAreaProvider>
+				<Routes/>
+			</SafeAreaProvider>
+			</NavigationContainer>
+		</AuthProvider>
+    </LocationProvider>
   );
 }
