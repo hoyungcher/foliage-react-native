@@ -1,4 +1,5 @@
-import { View, Text, FlatList, TouchableOpacity, Keyboard } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, Keyboard, StyleSheet } from "react-native";
+import { ListItem } from "@rneui/base";
 import { useState } from "react";
 
 const SearchableDropdown = (props) => {
@@ -7,8 +8,8 @@ const SearchableDropdown = (props) => {
     return (
             <View>
                 {
-                    // locationResults.length ? 
                     <FlatList
+                        style={styles.listContainer}
                         data={locationResults}
                         keyExtractor={location => location._id}
                         renderItem={({item}) => {
@@ -19,22 +20,40 @@ const SearchableDropdown = (props) => {
                                         Keyboard.dismiss();
                                     }}
                                 >
-                                    <View>
-                                        <Text>{item.name}</Text>
+                                    <View style={styles.itemContainer}>
+                                        <Text style={styles.item}>{item.name}</Text>
                                     </View>
                                 </TouchableOpacity>)
                         }}
-                        ListEmptyComponent={<View><Text>No locations found.</Text></View>}
+                        ListEmptyComponent={
+                            <View style={styles.itemContainer}>
+                                <Text style={styles.item}>No locations found</Text>
+                            </View>
+                        }
                         keyboardShouldPersistTaps='handled'
                     />
-                    //  : 
-                    // <View>
-                    //     <Text>No locations found.</Text>
-                    // </View>
                 }
             </View>
 
     )
 }
+
+const styles = StyleSheet.create({
+    item: {
+        fontSize: 16
+    },
+    itemContainer: {
+        paddingVertical: 6
+    },
+    listContainer: {
+        borderWidth: 1,
+        borderRadius: 6,
+        borderColor: '#E8E8E8',
+        padding: 10,
+        marginHorizontal: 20,
+        opacity: 1,
+        backgroundColor: 'white'
+    }
+});
 
 export default SearchableDropdown;
