@@ -3,11 +3,10 @@ import { SafeAreaView, Text, TextInput, StyleSheet, View, TouchableOpacity, Butt
 
 import Spacer from '../components/Spacer';
 import foliageApi from '../api/foliage';
-import SearchableDropDown from '../components/SearchableDropdown';
+import SearchableDropdown from '../components/SearchableDropdown';
 import Dropdown from '../components/Dropdown';
 import { Context as LocationContext } from '../context/locationContext';
 import { Context as PhenomenonContext } from '../context/phenomenonContext';
-
 
 const CreateReportScreen = () => {
     const [description, setDescription] = useState('');
@@ -19,6 +18,7 @@ const CreateReportScreen = () => {
 
     const [phenomenonOpen, setPhenomenonOpen] = useState(false);
     const [phenomenonValue, setPhenomenonValue] = useState(null);
+
     // Set value of outer textinput field to selection
     const { state: locationState, fetchLocationResults } = useContext(LocationContext);
     const { state: phenomenonState, fetchAllPhenomena } = useContext(PhenomenonContext);
@@ -83,8 +83,7 @@ const CreateReportScreen = () => {
                 />
                 {showLocationSuggestions ? (
 
-                    <SearchableDropDown
-                        style={styles.searchableDropdown}
+                    <SearchableDropdown
                         locations={locationState}
                         updateLocation={selectLocationId}
                     />
@@ -135,13 +134,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF'
     },
     headingBox: {
-        borderBottomColor: '#F4F4F4',
-        borderBottomWidth: 2,
-        marginBottom: 20
+        marginTop: 20,
+        marginBottom: 20,
+        marginLeft: 20
     },
     headingText: {
-        fontSize: 24,
-        marginLeft: 12
+        fontSize: 28
     },
     inputLabel: {
         fontSize: 14,
@@ -157,9 +155,6 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         borderColor: '#E8E8E8',
         borderWidth: 1,
-
-    },
-    searchableDropdown: {
 
     },
     submitButton: {
