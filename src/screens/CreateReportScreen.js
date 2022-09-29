@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { SafeAreaView, Text, TextInput, StyleSheet, View, TouchableOpacity, Button, Keyboard } from 'react-native';
+import { SafeAreaView, Text, TextInput, StyleSheet, View, TouchableOpacity, Button, Keyboard, Pressable } from 'react-native';
 
 import Spacer from '../components/Spacer';
 import foliageApi from '../api/foliage';
@@ -31,15 +31,16 @@ const CreateReportScreen = () => {
     const selectPhenomenonId = (id, name) => {
         setPhenomenonId(id);
         setPhenomenonName(name);
-        setPhenomenonOpen(!phenomenonOpen)
+        setPhenomenonOpen(false);
     }
 
     const submitReport = async () => {
+        const timestamp = Date.now()
         const report = {
             description, 
+            timestamp,
             phenomenon: phenomenonId,
-            location: locationId,
-            timestamp: 12020303
+            location: locationId
         };
         const response = await foliageApi.post('reports', report);
         // navigate to reports
@@ -52,70 +53,78 @@ const CreateReportScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.headingBox}>
-                <Text style={styles.headingText}>Create New Report</Text>
-            </View>
-            <Text style={styles.inputLabel}>Location</Text>
-            <TextInput
-                name="Location"
-                placeholder='Search for a location'
-                onChangeText={(text) => {
-                    setLocationName(text);
-                    if (text.length > 0) {
-                        fetchLocationResults(text)
-                    }
-                }}
-                style={styles.input}
-                value={locationName}
-                onBlur={() => setShowLocationSuggestions(false)}
-                onFocus={() => {
-                    setShowLocationSuggestions(true);
-                    setPhenomenonOpen(false);
-                }}
-            />
-            {showLocationSuggestions ? (
-
-                <SearchableDropDown
-                    style={styles.searchableDropdown}
-                    locations={locationState}
-                    updateLocation={selectLocationId}
-                />
-            ) : <></>}
-            <Text style={styles.inputLabel}>Phenomenon</Text>
-            <TouchableOpacity
+            <Pressable
+                style={{minHeight: '100%'}} 
                 onPress={() => {
-                    setPhenomenonOpen(!phenomenonOpen);
-                    setShowLocationSuggestions(false);
                     Keyboard.dismiss();
+                    selectPhenomenonId();
                 }}
             >
-                <Text
+                <View style={styles.headingBox}>
+                    <Text style={styles.headingText}>Create New Report</Text>
+                </View>
+                <Text style={styles.inputLabel}>Location</Text>
+                <TextInput
+                    name="Location"
+                    placeholder='Search for a location'
+                    onChangeText={(text) => {
+                        setLocationName(text);
+                        if (text.length > 0) {
+                            fetchLocationResults(text)
+                        }
+                    }}
                     style={styles.input}
+                    value={locationName}
+                    onBlur={() => setShowLocationSuggestions(false)}
+                    onFocus={() => {
+                        setShowLocationSuggestions(true);
+                        setPhenomenonOpen(false);
+                    }}
+                />
+                {showLocationSuggestions ? (
+
+                    <SearchableDropDown
+                        style={styles.searchableDropdown}
+                        locations={locationState}
+                        updateLocation={selectLocationId}
+                    />
+                ) : <></>}
+                <Text style={styles.inputLabel}>Phenomenon</Text>
+                <TouchableOpacity
+                    onPress={() => {
+                        setPhenomenonOpen(!phenomenonOpen);
+                        setShowLocationSuggestions(false);
+                        Keyboard.dismiss();
+                    }}
                 >
-                    {phenomenonName}
-                </Text>
-            </TouchableOpacity>
-            { phenomenonOpen ? 
-                <Dropdown
-                    phenomena={phenomenonState}
-                    updatePhenomenon={selectPhenomenonId}
-                /> : <></>
-            }
-            <Text style={styles.inputLabel}>Description</Text>
-            <TextInput
-                name="Description"
-                multiline={true}
-                style={styles.input}
-                value={description}
-                onChangeText={setDescription}
-            />
-            <Spacer/>
-            <TouchableOpacity 
-                style={styles.submitButton}
-                onPress={submitReport}
-            >
-                <Text style={styles.buttonText}>Submit Report</Text>
-            </TouchableOpacity>
+                    <Text
+                        style={styles.input}
+                    >
+                        {phenomenonName}
+                    </Text>
+                </TouchableOpacity>
+                { phenomenonOpen ? 
+                    <Dropdown
+                        phenomena={phenomenonState}
+                        updatePhenomenon={selectPhenomenonId}
+                    /> : <></>
+                }
+                <Text style={styles.inputLabel}>Description</Text>
+                <TextInput
+                    name="Description"
+                    multiline={true}
+                    style={styles.input}
+                    value={description}
+                    onChangeText={setDescription}
+                />
+                <Spacer/>
+                <TouchableOpacity 
+                    style={styles.submitButton}
+                    onPress={submitReport}
+                >
+                    <Text style={styles.buttonText}>Submit Report</Text>
+                </TouchableOpacity>
+            </Pressable>
         </SafeAreaView>
     )
 }
