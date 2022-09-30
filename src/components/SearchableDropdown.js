@@ -21,7 +21,7 @@ const SearchableDropdown = (props) => {
                                     }}
                                 >
                                     <View style={styles.itemContainer}>
-                                        <Text style={styles.item}>{item.name}</Text>
+                                        <Text style={styles.item}>{item.name + ", " + item.city.name}</Text>
                                     </View>
                                 </TouchableOpacity>)
                         }}

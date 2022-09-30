@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { ImageBackground, StyleSheet, TouchableOpacity, View, TextInput } from 'react-native';
+import { ImageBackground, StyleSheet, TouchableOpacity, View, TextInput, SafeAreaView } from 'react-native';
 import { Input, Text, Button } from '@rneui/base';
 import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/authContext';
@@ -12,54 +12,61 @@ const LoginScreen = ({ navigation }) => {
     const [password, setPassword] = useState('');
 
     return (
-        <View styles={styles.container}>
-            <ImageBackground
+        <SafeAreaView styles={styles.container}>
+            {/* <ImageBackground
                 source={backgroundImage}
                 style={styles.background}
-            >
-                <View style={styles.loginBackground}>
-                    <Spacer>
-                        <Text style={styles.loginText}>Log In</Text>
-                    </Spacer>
-                    <TextInput style={styles.input}
-                        label="Email"
-                        value={email}
-                        onChangeText={setEmail}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                    />
-                    <Spacer/>
-                    <TextInput style={styles.input}
-                        secureTextEntry
-                        label="Password"
-                        value={password}
-                        onChangeText={setPassword}
-                        autoCapitalize="none"
-                        autoCorrect={false} 
-                    />
-                    {state.errorMessage ? <Text styles={styles.errorMessage}>{state.errorMessage}</Text> : null}
-                    <Spacer>
-                        <Button title="Log In" onPress={() => logIn({ email, password })}/>
-                    </Spacer>
-                    <TouchableOpacity onPress={() => navigation.navigate('CreateAccount')}>
-                        <Text>Don't have an account? Create an account instead.</Text>
-                    </TouchableOpacity>
+            > */}
+            <View style={styles.headingBox}>
+                <Text style={styles.loginText}>Log In</Text>
+            </View>
+            <View style={styles.formBox}>
+                <Text style={styles.inputLabel}>Email</Text>
+                <TextInput style={styles.input}
+                    label="Email"
+                    value={email}
+                    onChangeText={setEmail}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                />
+                <Text style={styles.inputLabel}>Password</Text>
+                <TextInput style={styles.input}
+                    secureTextEntry
+                    label="Password"
+                    value={password}
+                    onChangeText={setPassword}
+                    autoCapitalize="none"
+                    autoCorrect={false} 
+                />
+                {state.errorMessage ? <Text styles={styles.errorMessage}>{state.errorMessage}</Text> : null}
+                <Spacer>
+                    <Button title="Log In" onPress={() => logIn({ email, password })}/>
+                </Spacer>
+                <TouchableOpacity onPress={() => navigation.navigate('CreateAccount')}>
+                    <Text>Don't have an account? Create an account instead.</Text>
+                </TouchableOpacity>
 
-                </View>
+            </View>
 
-            </ImageBackground>
-        </View>
+            {/* </ImageBackground> */}
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: '#FFFFFF'
+    },
+    headingBox: {
+        marginTop: 20,
+        marginBottom: 20,
+        marginHorizontal: 20
     },
     background: {
         height: '100%',
         width: '100%',
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-start',
         alignItems: 'center'
     },
     errorMessage: {
@@ -71,24 +78,27 @@ const styles = StyleSheet.create({
     loginText: {
         fontSize: 40
     },
-    loginBackground: {
-        opacity: 0.7,
-        backgroundColor: 'white',
-        marginBottom: '40%',
-        maxWidth: '90%',
-        borderRadius: 10
-        
+    formBox: {
+        width: '100%'
         
         
     },
     input: {
-        maxWidth: '80%',
-        borderColor: 'black',
+        marginHorizontal: 20,
+        backgroundColor: '#F7F7F7',
+        fontSize: 16,
+        padding: 10,
+        borderRadius: 6,
+        borderColor: '#BBBBBB',
         borderWidth: 1,
-        marginLeft: 15,
-        fontSize: 24
 
-    }
+    },
+    inputLabel: {
+        fontSize: 14,
+        marginLeft: 20,
+        marginBottom: 8,
+        marginTop: 10
+    },
 })
 
 export default LoginScreen;

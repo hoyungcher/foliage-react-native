@@ -9,11 +9,11 @@ const backgroundImage = { uri: 'https://images.unsplash.com/photo-1543837173-6c2
 const WelcomeScreen = ({ navigation }) => {
     const [loaded] = useFonts({
         BlackJack: require('../../assets/fonts/BlackJack.ttf'),
-      });
+    });
     
-      if (!loaded) {
+    if (!loaded) {
         return null;
-      }
+    }
 
     return (
         <View style={styles.container}>

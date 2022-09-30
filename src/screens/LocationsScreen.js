@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { SafeAreaView, Text, StyleSheet, TextInput } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, TextInput, Pressable, Keyboard } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import SearchableDropdown from '../components/SearchableDropdown';
 import { Context as LocationContext } from '../context/locationContext';
 
@@ -18,36 +19,57 @@ const LocationsScreen = ({navigation}) => {
         })
     }
 
+    const navigateToExplore = () => {
+        navigation.pop();
+    }
+
     return (
         <SafeAreaView styles={styles.container}>
-            <TextInput
-                name="Location"
-                placeholder='Search for a location'
-                onChangeText={(text) => {
-                    setLocationName(text);
-                    if (text.length > 0) {
-                        fetchLocationResults(text)
-                    }
+            <Pressable
+                style={{minHeight: '100%'}} 
+                onPress={() => {
+                    Keyboard.dismiss();
                 }}
-                style={styles.searchBar}
-                value={locationName}
-                onBlur={() => setShowLocationSuggestions(false)}
-                onFocus={() => setShowLocationSuggestions(true)}
-            
-            />
-            {showLocationSuggestions ? (
-                <SearchableDropdown
-                    locations={locationState}
-                    updateLocation={navigateToLocation}
+            >
+                <View style={styles.headingBox}>
+                    <Ionicons 
+                        style={styles.backButton}
+                        name="chevron-back-circle-outline" size={24} color="black" 
+                        onPress={navigateToExplore}
+                    />
+                    <Text style={styles.headingText}>Explore Locations</Text>
+                </View>
+                <TextInput
+                    name="Location"
+                    placeholder='Search for a location'
+                    onChangeText={(text) => {
+                        setLocationName(text);
+                        if (text.length > 0) {
+                            fetchLocationResults(text)
+                        }
+                    }}
+                    style={styles.searchBar}
+                    value={locationName}
+                    onBlur={() => setShowLocationSuggestions(false)}
+                    onFocus={() => setShowLocationSuggestions(true)}
+                
                 />
-                ) : <></>}
+                {showLocationSuggestions ? (
+                    <SearchableDropdown
+                        locations={locationState}
+                        updateLocation={navigateToLocation}
+                    />
+                    ) : <></>}
+            </Pressable>
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-
+        flex: 1,
+        backgroundColor: '#FFFFFF',
+        // paddingHorizontal: 20
     },
     searchBar: {
         marginHorizontal: 20,
@@ -57,6 +79,16 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         borderColor: '#E8E8E8',
         borderWidth: 1
+    },
+    headingBox: {
+        margin: 20
+    },
+    backButton: {
+        position: 'absolute'
+    },
+    headingText: {
+        fontSize: 20,
+        alignSelf: 'center'
     },
 })
 

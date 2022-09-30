@@ -1,4 +1,3 @@
-import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { DateTime } from 'luxon';
 
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
@@ -9,13 +8,12 @@ import LeavesIcon from './icons/LeavesIcon';
 import BlossomsIcon from './icons/BlossomsIcon';
 
 const ReportCard = (props) => {
-    const { title, location, phenomenon, category, timestamp } = props;
+    const { title, location, phenomenon, category, timestamp, showLocation } = props;
 
     const timeDifferenceString = (timestamp) => {
         const currentTimestamp = DateTime.now();
         const previousTimestamp = DateTime.fromMillis(timestamp);
         const timeDifference = currentTimestamp.diff(previousTimestamp, 'seconds').toObject().seconds;
-        console.log(timeDifference);
         if (timeDifference <= 10) { return "Just now"; }
         if (timeDifference <= 60) { return "Less than a minute ago"; }
         if (timeDifference <= 90) { return "One minute ago"; }
@@ -27,22 +25,25 @@ const ReportCard = (props) => {
 
     return (
         <TouchableOpacity style={styles.cardContainer}>
-                <View style={styles.iconContainer}>
+            <View style={styles.iconContainer}>
+                {
                     {
-                        {
-                            'Birds': <BirdsIcon/>,
-                            'Blossoms': <BlossomsIcon/>,
-                            'Harvest': <HarvestIcon/>,
-                            'Leaves': <LeavesIcon/>,
-                            'MarineLife': <MarineLifeIcon/>,
-                        }[category]
-                    }
+                        'Birds': <BirdsIcon/>,
+                        'Blossoms': <BlossomsIcon/>,
+                        'Harvest': <HarvestIcon/>,
+                        'Leaves': <LeavesIcon/>,
+                        'MarineLife': <MarineLifeIcon/>,
+                    }[category]
+                }
+            </View>
+            <View>
+                <View style={styles.topLine}>
+                    <Text style={styles.timeText}>{timeDifferenceString(timestamp)}</Text>
+                    {showLocation ? <Text style={styles.locationText}>{location}</Text> : null}
                 </View>
-                <View>
-                    <Text>{timeDifferenceString(timestamp)}</Text>
-                    <Text style={styles.titleText} numberOfLines={1}>{title}</Text>
-                    <Text style={styles.phenomenonText}>{phenomenon}</Text>
-                </View>
+                <Text style={styles.titleText} numberOfLines={1}>{title}</Text>
+                <Text style={styles.phenomenonText}>{phenomenon}</Text>
+            </View>
         </TouchableOpacity>
     )
 }
@@ -50,19 +51,26 @@ const ReportCard = (props) => {
 
 const styles = StyleSheet.create({
     cardContainer: {
-        marginHorizontal: 20,
         borderColor: '#E8E8E8',
         borderWidth: 1,
         borderRadius: 8,
         backgroundColor: '#F7F7F7',
         padding: 10,
-        display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
     },
+    topLine: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    timeText: {
+        fontSize: 12
+    },
+    locationText: {
+        fontSize: 12
+    },
     titleText: {
         fontSize: 16,
-        marginBottom: 4
     },
     phenomenonText: {
         fontSize: 12
