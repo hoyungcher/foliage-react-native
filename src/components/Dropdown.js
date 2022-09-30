@@ -13,7 +13,7 @@ const Dropdown = (props) => {
                     return (
                         <TouchableOpacity
                             onPress={() => {
-                                updatePhenomenon(item._id, item.name)
+                                updatePhenomenon(item._id, item.name);
                                 Keyboard.dismiss();
                             }}
                         >

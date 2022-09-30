@@ -10,6 +10,7 @@ import { Context as PhenomenonContext } from '../context/phenomenonContext';
 
 const CreateReportScreen = () => {
     const [description, setDescription] = useState('');
+    const [title, setTitle] = useState('');
     const [locationId, setLocationId] = useState('');
     const [locationName, setLocationName] = useState('');
     const [phenomenonId, setPhenomenonId] = useState('');
@@ -37,6 +38,7 @@ const CreateReportScreen = () => {
     const submitReport = async () => {
         const timestamp = Date.now()
         const report = {
+            title,
             description, 
             timestamp,
             phenomenon: phenomenonId,
@@ -108,6 +110,13 @@ const CreateReportScreen = () => {
                         updatePhenomenon={selectPhenomenonId}
                     /> : <></>
                 }
+                <Text style={styles.inputLabel}>Title</Text>
+                <TextInput
+                    name="Title"
+                    style={styles.input}
+                    value={title}
+                    onChangeText={setTitle}
+                />
                 <Text style={styles.inputLabel}>Description</Text>
                 <TextInput
                     name="Description"

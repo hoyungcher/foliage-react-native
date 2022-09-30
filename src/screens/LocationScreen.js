@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, Text, StyleSheet, View } from 'react-native';
-import { Context as LocationContext } from '../context/locationContext';
+import { SafeAreaView, Text, StyleSheet, View, TouchableOpacity, FlatList } from 'react-native';
 import foliageApi from '../api/foliage';
-import { useFocusEffect } from '@react-navigation/native';
+import ReportCard from '../components/ReportCard';
 
 const LocationScreen = ({route, navigation}) => {
     const { locationName, locationId } = route.params
@@ -13,7 +12,12 @@ const LocationScreen = ({route, navigation}) => {
             .get(`locations/${id}`)
             .then((response) => setLocationData(response.data));
     }
-
+    const navigateToReport = (id) => {
+        navigation.push('Report', {
+            // reportTitle = title,
+            reportId: id
+        });
+    }
 
 
     // Retrieve Location and associated reports from API
@@ -28,8 +32,25 @@ const LocationScreen = ({route, navigation}) => {
             <View style={styles.headingBox}>
                 <Text style={styles.headingText}>{locationName}</Text>
             </View>
-            <View >
-                {console.log(locationData.location.coordinates)}
+            <View style={styles.reportsBox}>
+                <FlatList
+                    style={styles.reportsContainer}
+                    data={locationData.reports}
+                    keyExtractor={report => report._id}
+                    renderItem={(report) => {
+                        console.log(report);
+                        return (
+                            <ReportCard
+                                title={report.item.title}
+                                location={locationName}
+                                phenomenon={report.item.phenomenon.name}
+                                category={report.item.phenomenon.category}
+                                timestamp={report.item.timestamp}
+                            />
+                        )
+                    }}
+                    ListEmptyComponent={<></>}
+                />
             </View>
 
         </SafeAreaView>
@@ -49,6 +70,12 @@ const styles = StyleSheet.create({
     headingText: {
         fontSize: 28
     },
+    reportsBox: {
+
+    },
+    reportsContainer: {
+
+    }
 })
 
 export default LocationScreen;
