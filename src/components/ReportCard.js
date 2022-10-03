@@ -8,8 +8,7 @@ import LeavesIcon from './icons/LeavesIcon';
 import BlossomsIcon from './icons/BlossomsIcon';
 
 const ReportCard = (props) => {
-    const { title, location, phenomenon, category, timestamp, showLocation } = props;
-
+    const { id, title, location, phenomenon, category, timestamp, showLocation, navigateToReport } = props;
     const timeDifferenceString = (timestamp) => {
         const currentTimestamp = DateTime.now();
         const previousTimestamp = DateTime.fromMillis(timestamp);
@@ -24,7 +23,10 @@ const ReportCard = (props) => {
     }
 
     return (
-        <TouchableOpacity style={styles.cardContainer}>
+        <TouchableOpacity 
+            style={styles.cardContainer}
+            onPress={() => navigateToReport(id)}
+        >
             <View style={styles.iconContainer}>
                 {
                     {

@@ -10,7 +10,15 @@ import ReportCard from '../components/ReportCard';
 const ExploreScreen = ({navigation}) => {
     const [exploreReports, setExploreReports] = useState({});
 
-    
+    const navigateToReport = (id) => {
+        console.log("NAVIGATE");
+        console.log(id);
+        navigation.navigate('Report', {
+            reportId: id
+        });
+    }
+
+
     const fetchExploreReports = () => {
         foliageApi
             .get('reports/explore')
@@ -66,12 +74,14 @@ const ExploreScreen = ({navigation}) => {
                             console.log(report);
                             return (
                                 <ReportCard
+                                    id={report.item._id}
                                     title={report.item.title}
                                     location={report.item.location.name}
                                     phenomenon={report.item.phenomenon.name}
                                     category={report.item.phenomenon.category}
                                     timestamp={report.item.timestamp}
                                     showLocation={true}
+                                    navigateToReport={navigateToReport}
                                 />
 
                             )

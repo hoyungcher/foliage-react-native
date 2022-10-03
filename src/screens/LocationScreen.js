@@ -63,12 +63,14 @@ const LocationScreen = ({route, navigation}) => {
                     renderItem={(report) => {
                         return (
                             <ReportCard
+                                id={report.item._id}
                                 title={report.item.title}
                                 location={locationName}
                                 phenomenon={report.item.phenomenon.name}
                                 category={report.item.phenomenon.category}
                                 timestamp={report.item.timestamp}
-                                showLocation={true}
+                                showLocation={false}
+                                navigateToReport={navigateToReport}
                             />
                         )
                     }}
