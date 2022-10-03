@@ -11,7 +11,10 @@ const LocationScreen = ({route, navigation}) => {
     const fetchLocationData = (id) => {
         foliageApi
             .get(`locations/${id}`)
-            .then((response) => setLocationData(response.data));
+            .then((response) => setLocationData(response.data))
+            .catch((error) => console.log(error));
+
+            // TO DO: display error message (i.e. something went wrong)
     }
     const navigateToReport = (id) => {
         navigation.push('Report', {

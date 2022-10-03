@@ -10,11 +10,14 @@ import ReportCard from '../components/ReportCard';
 const ExploreScreen = ({navigation}) => {
     const [exploreReports, setExploreReports] = useState({});
 
+    
     const fetchExploreReports = () => {
         foliageApi
             .get('reports/explore')
-            .then((response) => setExploreReports(response.data));
+            .then((response) => setExploreReports(response.data))
+            .catch((error) => console.log(error));
     }
+    // TO DO: display error message (i.e. something went wrong)
 
     useEffect(() => {
         fetchExploreReports();

@@ -36,7 +36,7 @@ const ReportCard = (props) => {
                     }[category]
                 }
             </View>
-            <View>
+            <View style={styles.infoContainer}>
                 <View style={styles.topLine}>
                     <Text style={styles.timeText}>{timeDifferenceString(timestamp)}</Text>
                     {showLocation ? <Text style={styles.locationText}>{location}</Text> : null}
@@ -56,8 +56,12 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         backgroundColor: '#F7F7F7',
         padding: 10,
+        display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    infoContainer: {
+        flex: 1
     },
     topLine: {
         flexDirection: 'row',
@@ -65,6 +69,7 @@ const styles = StyleSheet.create({
     },
     timeText: {
         fontSize: 12
+
     },
     locationText: {
         fontSize: 12
