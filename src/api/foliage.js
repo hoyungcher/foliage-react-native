@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const instance = axios.create({
     // baseURL: 'https://foliage-api.onrender.com'
-    baseURL: 'http://f46b-2a02-c7c-5c03-6300-407f-279b-3cf4-3b3c.ngrok.io'
+    baseURL: 'http://b024-2a02-6b60-9c6b-0-11ff-c85-a170-e3c2.ngrok.io'
 });
 
 // Automatically add token to every request
