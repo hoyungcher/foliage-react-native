@@ -3,20 +3,24 @@ import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { DateTime } from "luxon";
 import foliageApi from '../api/foliage';
+import ScreenHeader from '../components/ScreenHeader';
 
 const ReportScreen = ({route, navigation}) => {
     const { reportId } = route.params
-    const [reportData, setReportData] = useState({});
-    console.log(reportData);
+    const [reportData, setReportData] = useState({
+        title: "",
+        description: "",
+        timestamp: 0,
+        location: {name: ""}
+    });
     
     const fetchReportData = (id) => {
         foliageApi
-            .get(`reports/${reportId}`)
+            .get(`reports/${id}`)
             .then((response) => setReportData(response.data))
             .catch((error) => console.log(error));
 
             // TO DO: display error message (i.e. something went wrong)
-        
     }
 
     const navigateToExplore = () => {
@@ -29,14 +33,10 @@ const ReportScreen = ({route, navigation}) => {
 
     return (
         <SafeAreaView styles={styles.container}>
-            <View style={styles.headingBox}>
-                <Ionicons 
-                    style={styles.backButton}
-                    name="chevron-back-circle-outline" size={24} color="black" 
-                    onPress={navigateToExplore}
-                />
-                <Text style={styles.headingText}>{reportData.title}</Text>
-            </View>
+            <ScreenHeader
+                pageTitle={reportData.title}
+                handleBackButton={navigateToExplore}
+            />
             <View
                 style={styles.descriptionBox}
             >
@@ -53,16 +53,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFFFFF'
 
-    },
-    headingBox: {
-        margin: 20
-    },
-    backButton: {
-        position: 'absolute'
-    },
-    headingText: {
-        fontSize: 20,
-        alignSelf: 'center'
     },
     descriptionBox: {
         marginHorizontal: 20,
