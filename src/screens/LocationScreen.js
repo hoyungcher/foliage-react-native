@@ -32,8 +32,6 @@ const LocationScreen = ({route, navigation}) => {
     useEffect(() => {
         fetchLocationData(locationId);
     }, [])
-    console.log(locationData);
-    console.log(locationName);
     
 
 

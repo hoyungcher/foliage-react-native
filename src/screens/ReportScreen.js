@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { DateTime } from "luxon";
 import foliageApi from '../api/foliage';
 
 const ReportScreen = ({route, navigation}) => {
@@ -36,10 +37,13 @@ const ReportScreen = ({route, navigation}) => {
                 />
                 <Text style={styles.headingText}>{reportData.title}</Text>
             </View>
-            <View>
-                
+            <View
+                style={styles.descriptionBox}
+            >
+                <Text>{DateTime.fromMillis(reportData.timestamp).toLocaleString(DateTime.DATETIME_MED)}</Text>
+                <Text>{reportData.location.name}</Text>
+                <Text>{reportData.description}</Text>
             </View>
-            <Text>ReportScreen</Text>
         </SafeAreaView>
     )
 }
@@ -59,6 +63,10 @@ const styles = StyleSheet.create({
     headingText: {
         fontSize: 20,
         alignSelf: 'center'
+    },
+    descriptionBox: {
+        marginHorizontal: 20,
+        marginBottom: 20
     },
 })
 
