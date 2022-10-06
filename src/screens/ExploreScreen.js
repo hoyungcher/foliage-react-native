@@ -71,7 +71,6 @@ const ExploreScreen = ({navigation}) => {
                         data={exploreReports}
                         keyExtractor={report => report._id}
                         renderItem={(report) => {
-                            console.log(report);
                             return (
                                 <ReportCard
                                     id={report.item._id}
